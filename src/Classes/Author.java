@@ -1,5 +1,7 @@
 package Classes;
 
+import java.util.Objects;
+
 public class Author {
     private String name;
     private String surname;
@@ -9,14 +11,26 @@ public class Author {
         this.surname = surname;
     }
     public String getName() {
-        return this.name;
+        return name;
     }
     public String getSurname() {
-        return this.surname;
+        return surname;
     }
-    public String toString() { //создан для проверки
-        String info = name + " " + surname;
-        return info;
+    @Override
+    public String toString() {
+        return name + " " + surname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Author author = (Author) o;
+        return Objects.equals(name, author.name) && Objects.equals(surname, author.surname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname);
+    }
 }
